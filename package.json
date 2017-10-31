@@ -1,0 +1,22 @@
+{
+  "name": "typeelectron",
+  "version": "1.0.0",
+  "description": "使用typescript 和 electrion 进行 项目的开发, 单丝... 做什么我也不知道,其中会用到jquery 和 bootstrap 进行界面的绘制...",
+  "main": "./js/main.js",
+  "scripts": {
+    "test": " ",
+    "prebuild": "rimraf ./js && mkdir js",
+    "build": "tsc",
+    "postbuild": "echo ...... is over",
+    "libconfig": "npm install -s jquery  bootstrap  electron  @types/jquery @types/bootstrap @types/electron"
+  },
+  "author": "史恭文",
+  "license": "ISC",
+  "dependencies": {
+    "@types/bootstrap": "^3.3.36",
+    "@types/electron": "^1.6.10",
+    "@types/jquery": "^3.2.15",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1"
+  }
+}
