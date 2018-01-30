@@ -13,10 +13,10 @@
   "author": "史恭文",
   "license": "ISC",
   "dependencies": {
-    "@types/bootstrap": "^3.3.36",
+    "@types/bootstrap": "^3.3.37",
     "@types/electron": "^1.6.10",
-    "@types/jquery": "^3.2.15",
+    "@types/jquery": "^3.3.0",
     "bootstrap": "^3.3.7",
-    "jquery": "^3.2.1"
+    "jquery": "^3.3.1"
   }
 }
