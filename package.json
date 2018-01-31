@@ -17,6 +17,7 @@
     "@types/electron": "^1.6.10",
     "@types/jquery": "^3.3.0",
     "bootstrap": "^3.3.7",
+    "electron": "^1.8.1",
     "jquery": "^3.3.1"
   }
 }
