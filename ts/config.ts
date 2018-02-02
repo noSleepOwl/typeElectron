@@ -1,11 +1,11 @@
 import { BrowserWindowConstructorOptions } from 'electron';
 import * as url from 'url';
 import * as path from 'path';
+
 interface Option {
     win: BrowserWindowConstructorOptions;
     mainUrl: string;
 }
-
 
 namespace Option {
     let win: BrowserWindowConstructorOptions = {

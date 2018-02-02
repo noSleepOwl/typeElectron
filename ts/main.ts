@@ -11,14 +11,13 @@ function createWindow(): void {
         win = null;
     })
 }
+
+
 function window_all_closed() {
     if (process.platform !== 'darwin') {
         app.quit();
     }
 }
-
-
-
 
 app.on('ready', createWindow);
 app.on('window-all-closed', window_all_closed)
