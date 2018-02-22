@@ -1,7 +1,7 @@
 /**
  * ??????
  */
-import { BrowserWindowConstructorOptions } from 'electron';
+import { BrowserWindowConstructorOptions, BrowserWindow } from 'electron';
 import * as url from 'url';
 import * as path from 'path';
 
@@ -16,7 +16,20 @@ namespace Option {
         minWidth: 600
     }
     // 格式化请求地址
-    export let mainUrl: string = urlFormat('../html/index.html')
+    let mainUrl: string = urlFormat('../html/index.html')
+    // 创建窗口
+    export function runWindow(win: BrowserWindow | null) {
+        if (win != null) {
+            //打开控制台
+            win.webContents.openDevTools();
+            // 读取页面
+            win.loadURL(mainUrl);
+            //绑定事件
+            win.on('close', () => {
+                win = null;
+            });
+        }
+    }
 }
 // 地址函数返回
 function urlFormat(urlStr: string) {

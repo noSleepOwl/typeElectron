@@ -2300,9 +2300,6 @@ $(document).ready(function () {
 		setTimeout(MessagesMenuWidth, 250);
 	});
 	var ajax_url = location.hash.replace(/^#/, '');
-	debugger;
-	console.log(location.hash);
-	console.log(ajax_url);
 	
 	
 	if (ajax_url.length < 1) {

@@ -6,12 +6,8 @@ let win: BrowserWindow | null;
 
 function createWindow(): void {
     win = new BrowserWindow(option.win)
-    win.loadURL(option.mainUrl);
-    win.on('close', () => {
-        win = null;
-    })
+    option.runWindow(win);
 }
-
 
 function window_all_closed() {
     if (process.platform !== 'darwin') {

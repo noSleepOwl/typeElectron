@@ -7,9 +7,11 @@ window.$ = window.jQuery = $;
 import 'bootstrap';
 
 $(() => {
-    $('button').click(function () {
-        alert("ok 测试测试编译");
-    });
+    // 窗口改变事件 
+    remote.getCurrentWindow().on('resize', () => {
+        indexPage.resizeIndex();
+    })
     //菜单栏点击事件绑定
     $('.main-menu').on('click', 'a', indexPage.leftPageClick);
+    indexPage.loadSideBarLeft();
 })
