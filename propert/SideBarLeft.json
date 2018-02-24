@@ -2,27 +2,22 @@
     {
         "name": "测试菜单_1",
         "icon": "fa fa-dashboard",
-        "href": "string",
         "children": [
             {
                 "name": "测试菜单_1_1",
-                "href": "string"
+                "href": "html/ajax/tables_beauty.html"
             },
             {
                 "name": "测试菜单_1_2",
-                "href": "string",
                 "children": [
                     {
-                        "name": "测试菜单_1_2_1",
-                        "href": "string"
+                        "name": "测试菜单_1_2_1"
                     },
                     {
-                        "name": "测试菜单_2_2",
-                        "href": "string"
+                        "name": "测试菜单_2_2"
                     },
                     {
-                        "name": "测试菜单_2_3",
-                        "href": "string"
+                        "name": "测试菜单_2_3"
                     }
                 ]
             }

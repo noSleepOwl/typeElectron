@@ -15,7 +15,6 @@
   "dependencies": {
     "@types/bootstrap": "^3.3.37",
     "@types/d3": "^5.0.0",
-    "@types/electron": "^1.6.10",
     "@types/fancybox": "^2.1.32",
     "@types/flot": "0.0.31",
     "@types/fullcalendar": "^3.8.0",

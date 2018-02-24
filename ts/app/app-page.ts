@@ -55,6 +55,8 @@ export namespace indexPage {
         let nameTag = $('span', ele);
         if (option.href)
             link.attr('href', option.href)
+        else
+            link.attr('href','javascript:void(0);')    
 
         nameTag.text(option.name);
         if (option.icon)
@@ -76,11 +78,8 @@ export namespace indexPage {
         $.getJSON(getPath() + 'propert/SideBarLeft.json', function (data: SideBarLeftOption[]) {
             createSideBarLefts(data);
         })
-        /*  readFile("", { encoding: '', flag: '' }, (err: NodeJS.ErrnoException, data: string | Buffer) => {
-             let option = <SideBarLeftOption[]>eval('(' + data + ')');
-             console.log(option)
-         }); */
     }
+    // 左侧菜单栏效果
     export function leftPageClick(this: HTMLElement, e: JQuery.Event) {
         //a 标签的 父级li 
         var parents = $(this).parents('li');
@@ -123,14 +122,46 @@ export namespace indexPage {
             }
             var url = $(this).attr('href');
             // window.location.hash = url;
-            // LoadAjaxContent(url);
+            LoadAjaxContent(url!);
         }
         if ($(this).attr('href') == '#') {
             e.preventDefault();
         }
     }
+    function MessagesMenuWidth() {
+        var W = window.innerWidth;
+        var W_menu = $('#sidebar-left').outerWidth();
+        var w_messages = (W - W_menu!) * 16.666666666666664 / 100;
+        $('#messages-menu').width(w_messages);
+    }
+    // ajax 加载页面信息
+    function LoadAjaxContent(url: string) {
+        $('.preloader').show();
+        $.ajax({
+            mimeType: 'text/html; charset=utf-8', // ! Need set mimeType only when run from local file
+            url: getPath() + url,
+            type: 'GET',
+            success: function (data) {
+                $('#ajax-content').html(data);
+                $('.preloader').hide();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            },
+            dataType: "html",
+            async: false
+        });
+    }
+    /** 重置页面大小属性绑定*/
     export function resizeIndex() {
         var height = window.innerHeight - 49;
         $('#main').css('min-height', height);
+    }
+    /**侧边栏展示和隐藏快捷 */
+    export function showSilder() {
+        $('.show-sidebar').on('click', function () {
+            $('div#main').toggleClass('sidebar-show');
+            setTimeout(MessagesMenuWidth, 250);
+        });
     }
 }

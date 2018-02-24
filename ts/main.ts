@@ -1,14 +1,13 @@
 
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu, shell, dialog } from 'electron';
 import option from './config';
-
+import { meunOption } from './topMenu'
 let win: BrowserWindow | null;
 
 function createWindow(): void {
     win = new BrowserWindow(option.win)
     option.runWindow(win);
 }
-
 function window_all_closed() {
     if (process.platform !== 'darwin') {
         app.quit();
@@ -23,3 +22,8 @@ app.on('activate', () => {
     }
 })
 
+//加载顶部菜单
+app.on('ready', function () {
+    const menu = Menu.buildFromTemplate(meunOption)
+    Menu.setApplicationMenu(menu)
+})
