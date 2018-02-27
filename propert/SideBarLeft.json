@@ -1,11 +1,11 @@
 [
     {
-        "name": "测试菜单_1",
+        "name": "客户管理",
         "icon": "fa fa-dashboard",
         "children": [
             {
-                "name": "测试菜单_1_1",
-                "href": "html/ajax/tables_beauty.html"
+                "name": "客户管理",
+                "href": "customer/list.html"
             },
             {
                 "name": "测试菜单_1_2",

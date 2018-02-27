@@ -1,5 +1,6 @@
 import { readFile } from 'fs'
 import { remote } from 'electron'
+import { appPath } from './app-info'
 export namespace indexPage {
     let menuHtmlEle = `
     <li>
@@ -19,11 +20,41 @@ export namespace indexPage {
         // 子菜单
         children?: SideBarLeftOption[]
     }
-    /** 获取应用的根目录(未编译过,无法尝试 对错)*/
-    function getPath(): string {
-        let path = remote.app.getPath('exe');
-        let index = path.indexOf('node_modules');
-        return path.substr(0, index);
+    function WinMove() {
+
+        $("div.box").not('.no-drop').draggable({
+            revert: true,
+            zIndex: 2000,
+            cursor: "crosshair",
+            handle: '.box-name',
+            opacity: 0.8
+        })
+            .droppable({
+                tolerance: 'pointer',
+                drop: function (event, ui) {
+                    var draggable = ui.draggable;
+                    var droppable = $(this);
+                    var dragPos = draggable.position();
+                    var dropPos = droppable.position();
+                    draggable.swap(droppable);
+                    setTimeout(function () {
+                        var dropmap = droppable.find('[id^=map-]');
+                        var dragmap = draggable.find('[id^=map-]');
+                        if (dragmap.length > 0 || dropmap.length > 0) {
+                            dragmap.resize();
+                            dropmap.resize();
+                        }
+                        else {
+                            draggable.resize();
+                            droppable.resize();
+                        }
+                    }, 50);
+                    setTimeout(function () {
+                        draggable.find('[id^=map-]').resize();
+                        droppable.find('[id^=map-]').resize();
+                    }, 250);
+                }
+            });
     }
     /**
      * 通过配置信息创建菜单
@@ -54,9 +85,9 @@ export namespace indexPage {
         let icon = $('i', ele);
         let nameTag = $('span', ele);
         if (option.href)
-            link.attr('href', option.href)
+            link.attr('href', `/html/page/${option.href}`);
         else
-            link.attr('href','javascript:void(0);')    
+            link.attr('href', 'javascript:void(0);')
 
         nameTag.text(option.name);
         if (option.icon)
@@ -75,7 +106,7 @@ export namespace indexPage {
      * 通过json 文件创建菜单
     */
     export function loadSideBarLeft() {
-        $.getJSON(getPath() + 'propert/SideBarLeft.json', function (data: SideBarLeftOption[]) {
+        $.getJSON(`${appPath}/propert/SideBarLeft.json`, function (data: SideBarLeftOption[]) {
             createSideBarLefts(data);
         })
     }
@@ -139,7 +170,7 @@ export namespace indexPage {
         $('.preloader').show();
         $.ajax({
             mimeType: 'text/html; charset=utf-8', // ! Need set mimeType only when run from local file
-            url: getPath() + url,
+            url: appPath + url,
             type: 'GET',
             success: function (data) {
                 $('#ajax-content').html(data);

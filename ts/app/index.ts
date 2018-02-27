@@ -9,6 +9,16 @@ import 'jquery-ui'
 import 'justifiedgallery'
 import 'tinymce'
 $(() => {
+    //jquer扩展
+    jQuery.fn.swap = function (b: JQuery) {
+        let ele = $(b)[0];
+        var a = this[0];
+        var t = a.parentNode!.insertBefore(document.createTextNode(''), a);
+        ele.parentNode!.insertBefore(a, ele);
+        t.parentNode!.insertBefore(ele, t);
+        t.parentNode!.removeChild(t);
+        return this;
+    };
     // 窗口改变事件 
     remote.getCurrentWindow().on('resize', () => {
         indexPage.resizeIndex();

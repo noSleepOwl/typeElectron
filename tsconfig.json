@@ -8,7 +8,9 @@
     "listEmittedFiles": true,
     "listFiles": true,
     // "traceResolution": true,
-    "inlineSourceMap": true,
+    "sourceMap": true,
+    //map 文件和js文件在同一个文件中
+    "inlineSourceMap": false,
     // 含有隐式的any 的时候 报错
     "noImplicitAny": false
     // "jsx": "react-native"
