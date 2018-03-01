@@ -18,9 +18,11 @@
   "homepage": "https://github.com/noSleepOwl/typeElectron#readme",
   "dependencies": {
     "@types/glob": "^5.0.35",
+    "@types/jquery": "^3.3.0",
     "@types/sqlite3": "^3.1.1",
     "electron": "^1.8.2",
     "glob": "^7.1.2",
+    "jquery": "^3.3.1",
     "sqlite3": "^3.1.13"
   }
 }

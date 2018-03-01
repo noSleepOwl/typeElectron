@@ -1,12 +1,11 @@
 import { Database, RunResult } from 'sqlite3'
 import { join } from 'path'
 import { dataPath } from './url';
-console.log(join(dataPath, 'dbrest.db'))
+import 'jquery'
+window.$ = $;
 var db = new Database(join(dataPath, 'dbrest.db'));
 db.serialize(function () {
-    db.run("INSERT INTO lorem(info,info2) VALUES ($d1,$d2)", { $d1: "f1", $d2: "f2" }, function (this: RunResult, err: Error | null, res: any) {
-        console.log(arguments);
-    });
+
     db.run("delete from lorem where rowid > 1", function (this: RunResult, err: Error | null, res: any) {
         console.log(arguments);
     });
@@ -18,3 +17,31 @@ db.serialize(function () {
         console.log(arguments);
     });
 });
+$(function () {
+    let add = $('#add');
+    add.find('button').click(function () {
+        let arg: any = {};
+        add.find('input[name]').each(function () {
+            let name = $(this).attr('name');
+            let val = $(this).val();
+            switch (name) {
+                case 'name':
+                    arg['$d1'] = val;
+                    break;
+                case 'age':
+                    arg['$d2'] = val;
+                    break;
+                case 'clazz':
+                    arg['$d3'] = val;
+                    break;
+                default:
+                    break;
+            }
+        });
+        db.serialize(function () {
+            db.run("INSERT INTO student(name,age,clazz) VALUES ($d1,$d2,$d3)", arg, function (this: RunResult, err: Error | null, res: any) {
+                console.log(arguments);
+            });
+        })
+    });
+})
