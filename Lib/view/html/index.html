@@ -6,6 +6,32 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Document</title>
+	<style>
+		table.gridtable {
+			font-family: verdana, arial, sans-serif;
+			font-size: 11px;
+			color: #333333;
+			border-width: 1px;
+			border-color: #666666;
+			border-collapse: collapse;
+		}
+
+		table.gridtable th {
+			border-width: 1px;
+			padding: 8px;
+			border-style: solid;
+			border-color: #666666;
+			background-color: #dedede;
+		}
+
+		table.gridtable td {
+			border-width: 1px;
+			padding: 8px;
+			border-style: solid;
+			border-color: #666666;
+			background-color: #ffffff;
+		}
+	</style>
 </head>
 
 <body>
@@ -31,13 +57,18 @@
 		<button>删除</button>
 		<button>查询</button>
 	</div>
-	<table>
-		<thead>
-			<th>姓名</th>
-			<th>年龄</th>
-			<th>班级</th>
-		</thead>
-	</table>
+	<center>
+		<table class="gridtable">
+			<thead>
+				<th>姓名</th>
+				<th>年龄</th>
+				<th>班级</th>
+			</thead>
+			<tbody id="table">
+			</tbody>
+		</table>
+
+	</center>
 </body>
 <script>
 	require('../../render/index.js')

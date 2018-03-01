@@ -3,22 +3,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var sqlite3_1 = require("sqlite3");
 var path_1 = require("path");
 var url_1 = require("./url");
-require("jquery");
+var $ = require("jquery");
 window.$ = $;
 var db = new sqlite3_1.Database(path_1.join(url_1.dataPath, 'dbrest.db'));
-db.serialize(function () {
-    db.run("delete from lorem where rowid > 1", function (err, res) {
-        console.log(arguments);
+function select() {
+    db.serialize(function () {
+        db.all('SELECT * FROM student', function (err, row) {
+            var tr = '';
+            $.each(row, function (index, student) {
+                tr += "<tr>\n                <td>" + student.name + "</td>\n                <td>" + student.age + "</td>\n                <td>" + student.clazz + "</td>\n                </tr>";
+            });
+            $('#table').html(tr);
+        });
     });
-    db.run("UPDATE lorem SET info = ? WHERE rowid = ?", ["bar", 2]);
-    db.get("select * from lorem where rowid=?", [1], function (err, res) {
-        console.log(arguments);
-    });
-    db.all("select * from lorem", function (err, res) {
-        console.log(arguments);
-    });
-});
+}
 $(function () {
+    select();
     var add = $('#add');
     add.find('button').click(function () {
         var arg = {};
@@ -44,5 +44,6 @@ $(function () {
                 console.log(arguments);
             });
         });
+        select();
     });
 });

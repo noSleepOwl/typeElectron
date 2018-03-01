@@ -1,23 +1,37 @@
-import { Database, RunResult } from 'sqlite3'
+import { Database, RunResult, Statement } from 'sqlite3'
 import { join } from 'path'
 import { dataPath } from './url';
-import 'jquery'
+import * as $ from 'jquery'
+
+interface student {
+    name: string;
+    age: string;
+    clazz: string;
+}
+
 window.$ = $;
 var db = new Database(join(dataPath, 'dbrest.db'));
-db.serialize(function () {
 
-    db.run("delete from lorem where rowid > 1", function (this: RunResult, err: Error | null, res: any) {
-        console.log(arguments);
-    });
-    db.run("UPDATE lorem SET info = ? WHERE rowid = ?", ["bar", 2]);
-    db.get("select * from lorem where rowid=?", [1], function (err, res) {
-        console.log(arguments);
-    });
-    db.all("select * from lorem", function (err, res) {
-        console.log(arguments);
-    });
-});
+
+function select() {
+
+    db.serialize(function () {
+        db.all('SELECT * FROM student', function (this: Statement, err: Error | null, row: student[]) {
+            let tr = '';
+            $.each(row, function (index, student) {
+                tr += `<tr>
+                <td>${student.name}</td>
+                <td>${student.age}</td>
+                <td>${student.clazz}</td>
+                </tr>`
+            })
+            $('#table').html(tr);
+        })
+    })
+}
+
 $(function () {
+    select();
     let add = $('#add');
     add.find('button').click(function () {
         let arg: any = {};
@@ -43,5 +57,7 @@ $(function () {
                 console.log(arguments);
             });
         })
+        select();
     });
+
 })
