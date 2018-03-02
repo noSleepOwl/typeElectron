@@ -12,7 +12,6 @@ interface student {
 window.$ = $;
 var db = new Database(join(dataPath, 'dbrest.db'));
 
-
 function select() {
 
     db.serialize(function () {
